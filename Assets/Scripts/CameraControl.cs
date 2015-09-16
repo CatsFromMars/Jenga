@@ -76,7 +76,7 @@ public class CameraControl : MonoBehaviour
 			transform.rotation = rotation;
 		}
 
-		else if (Input.GetMouseButton(2))//middle button pressed
+		else if (Input.GetMouseButton(0))//left button pressed
 		{   
 
 			target.rotation = transform.rotation;
