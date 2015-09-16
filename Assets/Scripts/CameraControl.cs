@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour
 {
+	public bool camActive = true;
 	public Transform target;
 	public Vector3 targetOffset;
 	public float distance = 13.0f;
@@ -61,48 +62,45 @@ public class CameraControl : MonoBehaviour
 
 	void LateUpdate()
 	{
-		if (Input.GetMouseButton(1))//right button
-		{
-			xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
-			yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+		if (camActive) {
+			if (Input.GetMouseButton (1)) {//right button
+				xDeg += Input.GetAxis ("Mouse X") * xSpeed * 0.02f;
+				yDeg -= Input.GetAxis ("Mouse Y") * ySpeed * 0.02f;
 
-			//clamp the vertical axis for the rotation
-			yDeg = ClampAngle(yDeg, yMinLimit, yMaxLimit);
-			// set camera rotation
-			desiredRotation = Quaternion.Euler(yDeg, xDeg, 0);
-			currentRotation = transform.rotation;
+				//clamp the vertical axis for the rotation
+				yDeg = ClampAngle (yDeg, yMinLimit, yMaxLimit);
+				// set camera rotation
+				desiredRotation = Quaternion.Euler (yDeg, xDeg, 0);
+				currentRotation = transform.rotation;
+				
+				rotation = Quaternion.Lerp (currentRotation, desiredRotation, Time.deltaTime * zoomDampening);
+				transform.rotation = rotation;
+			} else if (Input.GetMouseButton (0)) {//left button pressed   
+
+				target.rotation = transform.rotation;
+				target.Translate (Vector3.right * -Input.GetAxis ("Mouse X") * panSpeed);
+				target.Translate (transform.up * -Input.GetAxis ("Mouse Y") * panSpeed, Space.World);
+			}
 			
-			rotation = Quaternion.Lerp(currentRotation, desiredRotation, Time.deltaTime * zoomDampening);
-			transform.rotation = rotation;
-		}
+			// Reset the moving 
+			else if (Input.GetKey (KeyCode.Space)) {
+				transform.position = initPosition;
+				transform.rotation = initRotation;
+				target.transform.position = initTargetPosition;
+				Init ();
+			}
 
-		else if (Input.GetMouseButton(2))//middle button pressed
-		{   
-
-			target.rotation = transform.rotation;
-			target.Translate(Vector3.right * -Input.GetAxis("Mouse X") * panSpeed);
-			target.Translate(transform.up * -Input.GetAxis("Mouse Y") * panSpeed, Space.World);
+			// affect the desired Zoom distance if we roll the scrollwheel
+			desiredDistance -= Input.GetAxis ("Mouse ScrollWheel") * Time.deltaTime * zoomRate * Mathf.Abs (desiredDistance);
+			//clamp the zoom min/max
+			desiredDistance = Mathf.Clamp (desiredDistance, minDistance, maxDistance);
+			// For smoothing of the zoom, lerp distance
+			currentDistance = Mathf.Lerp (currentDistance, desiredDistance, Time.deltaTime * zoomDampening);
+			
+			// calculate position based on the new currentDistance
+			position = target.position - (rotation * Vector3.forward * currentDistance + targetOffset);
+			transform.position = position;
 		}
-		
-		// Reset the moving 
-		else if (Input.GetKey(KeyCode.Space))
-		{
-			transform.position = initPosition;
-			transform.rotation = initRotation;
-			target.transform.position = initTargetPosition;
-			Init();
-		}
-
-		// affect the desired Zoom distance if we roll the scrollwheel
-		desiredDistance -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * zoomRate * Mathf.Abs(desiredDistance);
-		//clamp the zoom min/max
-		desiredDistance = Mathf.Clamp(desiredDistance, minDistance, maxDistance);
-		// For smoothing of the zoom, lerp distance
-		currentDistance = Mathf.Lerp(currentDistance, desiredDistance, Time.deltaTime * zoomDampening);
-		
-		// calculate position based on the new currentDistance
-		position = target.position - (rotation * Vector3.forward * currentDistance + targetOffset);
-		transform.position = position;
 	}
 	
 	private static float ClampAngle(float angle, float min, float max)

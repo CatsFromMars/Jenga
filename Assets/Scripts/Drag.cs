@@ -6,6 +6,21 @@ public class Drag : MonoBehaviour {
 	private Vector3 offset;
 	private Rigidbody rb;
 	Transform cursor;
+	MeshRenderer r;
+	private CameraControl cam;
+
+	void Awake() {
+		r = GetComponent<MeshRenderer>();
+		cam = Camera.main.GetComponent<CameraControl>();
+	}
+
+	void OnMouseEnter() {
+		r.material.SetColor("_Color", Color.red);
+	}
+
+	void OnMouseExit() {
+		r.material.SetColor("_Color", Color.white);
+	}
 	
 	void OnMouseDown()
 	{
@@ -17,10 +32,14 @@ public class Drag : MonoBehaviour {
 	
 	void OnMouseDrag()
 	{
-		transform.parent = cursor;
+		//transform.parent = cursor;
+		cam.camActive = false;
+		rb.AddForce((cursor.position - transform.position)*10);
 	}
 
 	void OnMouseUp() {
-		transform.parent = null;
+		cam.camActive = true;
+		//transform.parent = null;
+	
 	}
 }
