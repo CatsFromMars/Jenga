@@ -13,7 +13,8 @@ public class GameState : MonoBehaviour {
 
     private State currentState;
     //public GameObject finger;
-    public GameObject[] placeLocations;
+    public GameObject placeLocations;
+    public GameObject tower;
     public bool enableCheats;
 
     public static State CurrentState {
@@ -22,9 +23,15 @@ public class GameState : MonoBehaviour {
         }
     }
 
-    public static GameObject[] PlaceLocations {
+    public static GameObject PlaceLocations {
         get {
             return gameState.placeLocations;
+        }
+    }
+
+    public static GameObject Tower {
+        get {
+            return gameState.tower;
         }
     }
 
@@ -33,15 +40,27 @@ public class GameState : MonoBehaviour {
         switch (newState) {
             case State.Taking:
                 Debug.Log("switching to state: taking");
-                for (int i = 0; i < 3; i++) {
-                    PlaceLocations[i].SetActive(false);
+                foreach (Transform child in PlaceLocations.transform) {
+                    child.gameObject.SetActive(false);
                 }
                 break;
 
             case State.Placing:
                 Debug.Log("switching to state: placing");
-                for (int i = 0; i < 3; i++) {
-                    PlaceLocations[i].SetActive(true);
+
+                // Find max height of all children
+                float maxHeight = 0f;
+                foreach (Transform child in GameState.Tower.transform) {
+                    maxHeight = Mathf.Max(maxHeight, child.position.y);
+                }
+                if (maxHeight >= PlaceLocations.transform.position.y + 1.0f) {
+                    Vector3 newPosition = PlaceLocations.transform.position;
+                    newPosition.y = maxHeight + 1.0f;
+                    PlaceLocations.transform.position = newPosition;
+                }
+
+                foreach (Transform child in PlaceLocations.transform) {
+                    child.gameObject.SetActive(true);
                 }
 
                 cam.ScrollToTarget(new Vector3(1f, 9.5f, 1.5f));
@@ -49,8 +68,8 @@ public class GameState : MonoBehaviour {
 
             case State.GameOver:
                 Debug.Log("switching to state: gameover");
-                for (int i = 0; i < 3; i++) {
-                    PlaceLocations[i].SetActive(false);
+                foreach (Transform child in PlaceLocations.transform) {
+                    child.gameObject.SetActive(false);
                 }
                 // TODO(jason): slow motion, play music
                 break;
@@ -60,7 +79,7 @@ public class GameState : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Awake() {
+    void Start() {
         gameState = this;
         cam = Camera.main.GetComponent<CameraControl>();
     }
