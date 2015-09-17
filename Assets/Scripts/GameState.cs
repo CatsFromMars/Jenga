@@ -11,7 +11,8 @@ public class GameState : MonoBehaviour {
     private static GameState gameState;
 
     private State currentState;
-    public GameObject finger;
+    //public GameObject finger;
+    public GameObject[] placeLocations;
     public bool enableCheats;
 
     public static State CurrentState {
@@ -20,9 +21,9 @@ public class GameState : MonoBehaviour {
         }
     }
 
-    public static GameObject Finger {
+    public static GameObject[] PlaceLocations {
         get {
-            return gameState.finger;
+            return gameState.placeLocations;
         }
     }
 
@@ -30,15 +31,24 @@ public class GameState : MonoBehaviour {
     public static void ChangeState(State newState) {
         switch (newState) {
             case State.Taking:
-                Finger.SetActive(true);
+                Debug.Log("switching to state: taking");
+                for (int i = 0; i < 3; i++) {
+                    PlaceLocations[i].SetActive(false);
+                }
                 break;
 
             case State.Placing:
-                Finger.SetActive(false);
+                Debug.Log("switching to state: placing");
+                for (int i = 0; i < 3; i++) {
+                    PlaceLocations[i].SetActive(true);
+                }
                 break;
 
             case State.GameOver:
-                Finger.SetActive(false);
+                Debug.Log("switching to state: gameover");
+                for (int i = 0; i < 3; i++) {
+                    PlaceLocations[i].SetActive(false);
+                }
                 // TODO(jason): slow motion, play music
                 break;
         }
@@ -46,13 +56,9 @@ public class GameState : MonoBehaviour {
         gameState.currentState = newState;
     }
 
+    // Use this for initialization
     void Awake() {
         gameState = this;
-    }
-
-    // Use this for initialization
-    void Start () {
-        gameState.finger = finger;
     }
 
     // Update is called once per frame
@@ -62,13 +68,10 @@ public class GameState : MonoBehaviour {
         }
 
         if (Input.GetKeyDown("1")) {
-            Debug.Log("switching to state: taking");
             ChangeState(State.Taking);
         } else if (Input.GetKeyDown("2")) {
-            Debug.Log("switching to state: placing");
             ChangeState(State.Placing);
         } else if (Input.GetKeyDown("3")) {
-            Debug.Log("switching to state: gameover");
             ChangeState(State.GameOver);
         }
     }

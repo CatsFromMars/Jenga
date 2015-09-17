@@ -32,8 +32,8 @@ public class PlaceBlock : MonoBehaviour {
 	}
 
 	void OnMouseUp() {
-		gameObject.SetActive(false);
 		Instantiate(block, this.transform.position, this.transform.rotation);
+		GameState.ChangeState(GameState.State.Taking);
 		//cam.camActive = true;
 		//transform.parent = null;
 	}
