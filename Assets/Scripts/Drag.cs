@@ -15,7 +15,7 @@ public class Drag : MonoBehaviour {
 	}
 
 	void OnMouseEnter() {
-		r.material.SetColor("_Color", Color.red);
+		r.material.SetColor("_Color", new Color(0.8f, 0.8f, 1f, 1f)); // light blue
 	}
 
 	void OnMouseExit() {
