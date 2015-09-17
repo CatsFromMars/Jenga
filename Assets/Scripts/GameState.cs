@@ -9,6 +9,7 @@ public class GameState : MonoBehaviour {
     };
 
     private static GameState gameState;
+    private static CameraControl cam;
 
     private State currentState;
     //public GameObject finger;
@@ -42,6 +43,8 @@ public class GameState : MonoBehaviour {
                 for (int i = 0; i < 3; i++) {
                     PlaceLocations[i].SetActive(true);
                 }
+
+                cam.ScrollToTarget(new Vector3(1f, 9.5f, 1.5f));
                 break;
 
             case State.GameOver:
@@ -59,6 +62,7 @@ public class GameState : MonoBehaviour {
     // Use this for initialization
     void Awake() {
         gameState = this;
+        cam = Camera.main.GetComponent<CameraControl>();
     }
 
     // Update is called once per frame

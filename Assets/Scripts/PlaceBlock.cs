@@ -3,17 +3,10 @@ using System.Collections;
 
 public class PlaceBlock : MonoBehaviour {
 	public GameObject block;
-
-	//private Vector3 screenPoint;
-	//private Vector3 offset;
-	//private Rigidbody rb;
-	//Transform cursor;
 	MeshRenderer r;
-	private CameraControl cam;
 
 	void Awake() {
 		r = GetComponent<MeshRenderer>();
-		cam = Camera.main.GetComponent<CameraControl>();
 	}
 
 	void OnMouseEnter() {
@@ -34,7 +27,5 @@ public class PlaceBlock : MonoBehaviour {
 	void OnMouseUp() {
 		Instantiate(block, this.transform.position, this.transform.rotation);
 		GameState.ChangeState(GameState.State.Taking);
-		//cam.camActive = true;
-		//transform.parent = null;
 	}
 }

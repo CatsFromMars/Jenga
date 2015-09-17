@@ -28,6 +28,7 @@ public class CameraControl : MonoBehaviour
 	private Quaternion initRotation;
 	private Vector3 initPosition;
 	private Vector3 initTargetPosition;
+	private Vector3 newTarget = Vector3.zero;
 
 	void Start() { Init(); }
 	
@@ -55,13 +56,26 @@ public class CameraControl : MonoBehaviour
 		currentRotation = transform.rotation;
 		desiredRotation = transform.rotation;
 		
-		xDeg = Vector3.Angle(Vector3.right, transform.right );
-		yDeg = Vector3.Angle(Vector3.up, transform.up );
+		xDeg = Vector3.Angle(Vector3.right, transform.right);
+		yDeg = Vector3.Angle(Vector3.up, transform.up);
 	}
 
+	public void ScrollToTarget(Vector3 target) {
+		newTarget = target;
+	}
 
 	void LateUpdate()
 	{
+		// pan to new target incrementally
+		if (newTarget != Vector3.zero) {
+			if (Vector3.Distance(newTarget, target.position) > 0.5f) {
+				Vector3 offset = (newTarget - target.position).normalized * panSpeed / 2f;
+				target.position += offset;
+			} else {
+				newTarget = Vector3.zero;
+			}
+		}
+
 		if (camActive) {
 			if (Input.GetMouseButton (1)) {//right button
 				xDeg += Input.GetAxis ("Mouse X") * xSpeed * 0.02f;
@@ -75,7 +89,7 @@ public class CameraControl : MonoBehaviour
 				
 				rotation = Quaternion.Lerp (currentRotation, desiredRotation, Time.deltaTime * zoomDampening);
 				transform.rotation = rotation;
-			} else if (Input.GetMouseButton (0)) {//left button pressed   
+			} else if (Input.GetMouseButton (0)) {//left button pressed
 
 				target.rotation = transform.rotation;
 				target.Translate (Vector3.right * -Input.GetAxis ("Mouse X") * panSpeed);
