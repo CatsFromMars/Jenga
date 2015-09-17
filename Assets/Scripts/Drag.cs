@@ -34,11 +34,19 @@ public class Drag : MonoBehaviour {
 	{
 		//transform.parent = cursor;
 		cam.camActive = false;
-		rb.AddForce((cursor.position - transform.position)*10);
+		Vector3 force = (cursor.position - transform.position);
+		float x = force.x;
+		float z = force.z;
+		if(Mathf.Max(x,z) == x) z = 0;
+		else x = 0;
+		force = new Vector3 (x,0,z);
+		rb.AddForce(force*2);
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
 	}
 
 	void OnMouseUp() {
 		cam.camActive = true;
+		rb.constraints = RigidbodyConstraints.None;
 		//transform.parent = null;
 	
 	}
