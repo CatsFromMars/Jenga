@@ -40,7 +40,7 @@ public class Drag : MonoBehaviour {
 		if(Mathf.Max(x,z) == x) z = 0;
 		else x = 0;
 		force = new Vector3 (x,0,z);
-		rb.AddForce(force*2);
+		rb.AddForce(force*5f);
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
 	}
 

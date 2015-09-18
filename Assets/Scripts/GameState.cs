@@ -40,6 +40,7 @@ public class GameState : MonoBehaviour {
         switch (newState) {
             case State.Taking:
                 Debug.Log("switching to state: taking");
+				cam.ScrollToTarget(new Vector3(1f, 4.5f, 1.5f));
                 foreach (Transform child in PlaceLocations.transform) {
                     child.gameObject.SetActive(false);
                 }
@@ -71,7 +72,10 @@ public class GameState : MonoBehaviour {
                 foreach (Transform child in PlaceLocations.transform) {
                     child.gameObject.SetActive(false);
                 }
-                // TODO(jason): slow motion, play music
+                //Go to center
+				cam.ScrollToTarget(new Vector3(0f, 0f, 1.5f));
+				AudioSource a = cam.GetComponent<AudioSource>();
+				if(!a.isPlaying) a.Play();
                 break;
         }
 
