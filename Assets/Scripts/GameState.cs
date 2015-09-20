@@ -12,7 +12,6 @@ public class GameState : MonoBehaviour {
     private static CameraControl cam;
 
     private State currentState;
-    //public GameObject finger;
     public GameObject placeLocations;
     public GameObject tower;
     public bool enableCheats;
@@ -37,6 +36,10 @@ public class GameState : MonoBehaviour {
 
     // Handle state change logic
     public static void ChangeState(State newState) {
+        if (newState == CurrentState) {
+            return;
+        }
+
         switch (newState) {
             case State.Taking:
                 Debug.Log("switching to state: taking");
@@ -49,16 +52,14 @@ public class GameState : MonoBehaviour {
             case State.Placing:
                 Debug.Log("switching to state: placing");
 
-                // Find max height of all children
+                // Find max height of all children and adjust placement location
                 float maxHeight = 0f;
                 foreach (Transform child in GameState.Tower.transform) {
                     maxHeight = Mathf.Max(maxHeight, child.position.y);
                 }
-                if (maxHeight >= PlaceLocations.transform.position.y + 1.0f) {
-                    Vector3 newPosition = PlaceLocations.transform.position;
-                    newPosition.y = maxHeight + 1.0f;
-                    PlaceLocations.transform.position = newPosition;
-                }
+                Vector3 newPosition = PlaceLocations.transform.position;
+                newPosition.y = maxHeight + 1.0f;
+                PlaceLocations.transform.position = newPosition;
 
                 foreach (Transform child in PlaceLocations.transform) {
                     child.gameObject.SetActive(true);
@@ -72,7 +73,8 @@ public class GameState : MonoBehaviour {
                 foreach (Transform child in PlaceLocations.transform) {
                     child.gameObject.SetActive(false);
                 }
-                //Go to center
+
+                // Scroll to center
 				cam.ScrollToTarget(new Vector3(0f, 0f, 1.5f));
 				AudioSource a = cam.GetComponent<AudioSource>();
 				if(!a.isPlaying) a.Play();

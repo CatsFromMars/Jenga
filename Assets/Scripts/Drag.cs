@@ -26,6 +26,9 @@ public class Drag : MonoBehaviour {
 	}
 
 	void OnMouseEnter() {
+		if (GameState.CurrentState != GameState.State.Taking) {
+			return;
+		}
 		if (currentBlock != null && currentBlock != gameObject) {
 			return;
 		}
@@ -40,6 +43,10 @@ public class Drag : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
+		if (GameState.CurrentState != GameState.State.Taking) {
+			return;
+		}
+
 		cursor = GameObject.FindGameObjectWithTag("Cursor").transform;
 		initialDragPos = cursor.position;
 		cam.camActive = false;
@@ -49,6 +56,10 @@ public class Drag : MonoBehaviour {
 
 	void OnMouseDrag()
 	{
+		if (GameState.CurrentState != GameState.State.Taking) {
+			return;
+		}
+
 		Vector3 force = Vector3.Project(cursor.position - initialDragPos, transform.forward);
 		force = Vector3.ClampMagnitude(force * 5f, 10f);
 		rb.AddForce(force);
