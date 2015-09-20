@@ -2,52 +2,63 @@
 using System.Collections;
 
 public class Drag : MonoBehaviour {
-	private Vector3 screenPoint;
-	private Vector3 offset;
+	private static GameObject currentBlock;
+
+	public float maxVelocity = 5f;
+
 	private Rigidbody rb;
-	Transform cursor;
-	MeshRenderer r;
+	private Transform cursor;
+	private MeshRenderer r;
 	private CameraControl cam;
+	private Vector3 initialDragPos;
 
 	void Awake() {
 		r = GetComponent<MeshRenderer>();
+		rb = GetComponent<Rigidbody>();
 		cam = Camera.main.GetComponent<CameraControl>();
 	}
 
+	void Update() {
+		// Limit maximum velocity of block
+		if (rb.velocity.magnitude > maxVelocity) {
+			rb.AddForce(-30f * rb.velocity.normalized);
+		}
+	}
+
 	void OnMouseEnter() {
+		if (currentBlock != null && currentBlock != gameObject) {
+			return;
+		}
 		r.material.SetColor("_Color", new Color(0.8f, 0.8f, 1f, 1f)); // light blue
 	}
 
 	void OnMouseExit() {
+		if (currentBlock == gameObject) {
+			return;
+		}
 		r.material.SetColor("_Color", Color.white);
 	}
-	
-	void OnMouseDown()
-	{
-		screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-		rb = GetComponent <Rigidbody>();
-		offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-		cursor = GameObject.FindGameObjectWithTag ("Cursor").transform;
+
+	void OnMouseDown() {
+		cursor = GameObject.FindGameObjectWithTag("Cursor").transform;
+		initialDragPos = cursor.position;
+		cam.camActive = false;
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
+		currentBlock = gameObject;
 	}
-	
+
 	void OnMouseDrag()
 	{
-		//transform.parent = cursor;
-		cam.camActive = false;
-		Vector3 force = (cursor.position - transform.position);
-		float x = force.x;
-		float z = force.z;
-		if(Mathf.Max(x,z) == x) z = 0;
-		else x = 0;
-		force = new Vector3 (x,0,z);
-		rb.AddForce(force*5f);
-		rb.constraints = RigidbodyConstraints.FreezeRotation;
+		Vector3 force = Vector3.Project(cursor.position - initialDragPos, transform.forward);
+		force = Vector3.ClampMagnitude(force * 5f, 10f);
+		rb.AddForce(force);
 	}
 
 	void OnMouseUp() {
 		cam.camActive = true;
 		rb.constraints = RigidbodyConstraints.None;
-		//transform.parent = null;
-	
+
+		r.material.SetColor("_Color", Color.white);
+		currentBlock = null;
 	}
 }
