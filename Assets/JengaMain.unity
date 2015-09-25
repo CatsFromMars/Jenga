@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: .0469999984, g: .0430000015, b: .0350000001, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 969c7a4d65b31b34c88a2b66a5063c85, type: 2}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -267,7 +267,7 @@ Camera:
   m_GameObject: {fileID: 149163616}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: .493890584, g: .639705896, b: .597647667, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -1897,6 +1897,30 @@ Prefab:
     - target: {fileID: 401716, guid: 2c02836b3a811714cbfe21638f260883, type: 3}
       propertyPath: m_LocalScale.z
       value: 4.01325655
+      objectReference: {fileID: 0}
+    - target: {fileID: 401708, guid: 2c02836b3a811714cbfe21638f260883, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.10509968
+      objectReference: {fileID: 0}
+    - target: {fileID: 401708, guid: 2c02836b3a811714cbfe21638f260883, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: .119999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 401708, guid: 2c02836b3a811714cbfe21638f260883, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.71750021
+      objectReference: {fileID: 0}
+    - target: {fileID: 401708, guid: 2c02836b3a811714cbfe21638f260883, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.6361289
+      objectReference: {fileID: 0}
+    - target: {fileID: 401708, guid: 2c02836b3a811714cbfe21638f260883, type: 3}
+      propertyPath: m_LocalScale.y
+      value: -.0254160576
+      objectReference: {fileID: 0}
+    - target: {fileID: 401708, guid: 2c02836b3a811714cbfe21638f260883, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 6.20792866
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c02836b3a811714cbfe21638f260883, type: 3}
