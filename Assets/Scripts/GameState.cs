@@ -8,6 +8,7 @@ public class GameState : MonoBehaviour {
         GameOver, // everything collapsed
     };
 
+    public static int numPlaced = 0;
     private static GameState gameState;
     private static CameraControl cam;
 
@@ -61,6 +62,10 @@ public class GameState : MonoBehaviour {
                 newPosition.y = maxHeight + 1.0f;
                 PlaceLocations.transform.position = newPosition;
 
+                // Rotate every 3 tiles placed
+                if (GameState.numPlaced > 0 && GameState.numPlaced % 3 == 0) {
+                    PlaceLocations.transform.rotation *= Quaternion.Euler(0, 90, 0);
+                }
                 foreach (Transform child in PlaceLocations.transform) {
                     child.gameObject.SetActive(true);
                 }
@@ -76,8 +81,8 @@ public class GameState : MonoBehaviour {
 
                 // Scroll to center
 				cam.ScrollToTarget(new Vector3(0f, 0f, 1.5f));
-				AudioSource a = cam.GetComponent<AudioSource>();
-				if(!a.isPlaying) a.Play();
+				//AudioSource a = cam.GetComponent<AudioSource>();
+				//if(!a.isPlaying) a.Play();
                 break;
         }
 

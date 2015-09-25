@@ -30,5 +30,6 @@ public class PlaceBlock : MonoBehaviour {
 		GameObject newBlock = Instantiate(block, this.transform.position, this.transform.rotation) as GameObject;
 		newBlock.transform.parent = GameState.Tower.transform;
 		GameState.ChangeState(GameState.State.Taking);
+		GameState.numPlaced++;
 	}
 }
