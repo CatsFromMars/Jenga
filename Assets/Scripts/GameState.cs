@@ -82,7 +82,7 @@ public class GameState : MonoBehaviour {
                 }
 
                 // Scroll to center
-				cam.ScrollToTarget(new Vector3(0f, 0f, 1.5f));
+				cam.ScrollToTarget(new Vector3(2.7f, 8f, -1.3f));
 				//AudioSource a = cam.GetComponent<AudioSource>();
 				//if(!a.isPlaying) a.Play();
                 break;

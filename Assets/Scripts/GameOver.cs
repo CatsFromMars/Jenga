@@ -14,8 +14,6 @@ public class GameOver : MonoBehaviour {
 	void Update () {
 		if (GameState.CurrentState == GameState.State.GameOver) {
 			txt.text = "GAME OVER";
-			//Slow Down Time
-			Time.timeScale = 0.2f;
 		}
 	}
 }
