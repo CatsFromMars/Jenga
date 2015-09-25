@@ -9,6 +9,8 @@ public class GameState : MonoBehaviour {
     };
 
     public static int numPlaced = 0;
+    public static float maxHeight = 8f;
+
     private static GameState gameState;
     private static CameraControl cam;
 
@@ -54,7 +56,7 @@ public class GameState : MonoBehaviour {
                 Debug.Log("switching to state: placing");
 
                 // Find max height of all children and adjust placement location
-                float maxHeight = 0f;
+                maxHeight = 0f;
                 foreach (Transform child in GameState.Tower.transform) {
                     maxHeight = Mathf.Max(maxHeight, child.position.y);
                 }

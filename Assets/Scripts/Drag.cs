@@ -25,8 +25,8 @@ public class Drag : MonoBehaviour {
 		rb.velocity = newVelocity;
 	}
 
-	void OnMouseEnter() {
-		if (GameState.CurrentState != GameState.State.Taking) {
+	void OnMouseOver() {
+		if (IsDisabled()) {
 			return;
 		}
 		if (currentBlock != null && currentBlock != gameObject) {
@@ -43,7 +43,7 @@ public class Drag : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if (GameState.CurrentState != GameState.State.Taking) {
+		if (IsDisabled()) {
 			return;
 		}
 
@@ -56,9 +56,10 @@ public class Drag : MonoBehaviour {
 
 	void OnMouseDrag()
 	{
-		if (GameState.CurrentState != GameState.State.Taking) {
+		if (IsDisabled()) {
 			return;
 		}
+		Debug.Log(transform.position.y);
 
 		// Scale max velocity based on distance of cursor
 		Vector3 origin = initialDragPos + transform.position;
@@ -75,5 +76,15 @@ public class Drag : MonoBehaviour {
 
 		r.material.SetColor("_Color", Color.white);
 		currentBlock = null;
+	}
+
+	bool IsDisabled() {
+		if (GameState.CurrentState != GameState.State.Taking) {
+			return true;
+		}
+		if (GameState.maxHeight > 0 && GameState.maxHeight - transform.position.y <= 0.002f) {
+			return true;
+		}
+		return false;
 	}
 }
