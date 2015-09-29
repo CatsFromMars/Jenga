@@ -36,13 +36,13 @@ public class CameraControl : MonoBehaviour
 	
 	public void Init()
 	{
-		initPosition = new Vector3(transform.position.x, transform.position.y,transform.position.z);
-		initRotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+		initPosition = transform.position;//new Vector3(transform.position.x, transform.position.y,transform.position.z);
+		initRotation = transform.rotation;//new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
 		//If there is no target, create a temporary target at 'distance' from the cameras current viewpoint
 		if (!target)
 		{
 			GameObject go = new GameObject("Target");
-			go.transform.position =new Vector3(0.0f,5.0f,0.0f);
+			go.transform.position = transform.position;
 			initTargetPosition = go.transform.position;
 			target = go.transform;
 		}
@@ -51,7 +51,7 @@ public class CameraControl : MonoBehaviour
 		currentDistance = distance;
 		desiredDistance = distance;
 		
-		position = transform.position;//the original status
+		position = transform.position; //the original status
 		rotation = transform.rotation;
 		currentRotation = transform.rotation;
 		desiredRotation = transform.rotation;
@@ -84,7 +84,7 @@ public class CameraControl : MonoBehaviour
 				//clamp the vertical axis for the rotation
 				yDeg = ClampAngle (yDeg, yMinLimit, yMaxLimit);
 				// set camera rotation
-				desiredRotation = Quaternion.Euler (yDeg, xDeg, 0);
+				desiredRotation = Quaternion.Euler(yDeg, xDeg - 90, 0);
 				currentRotation = transform.rotation;
 				
 				rotation = Quaternion.Lerp (currentRotation, desiredRotation, Time.deltaTime * zoomDampening);
@@ -96,7 +96,7 @@ public class CameraControl : MonoBehaviour
 				target.Translate (transform.up * -Input.GetAxis ("Mouse Y") * panSpeed, Space.World);
 			}
 			
-			// Reset the moving 
+			// Reset the moving
 			else if (Input.GetKey (KeyCode.Space)) {
 				transform.position = initPosition;
 				transform.rotation = initRotation;
@@ -114,6 +114,11 @@ public class CameraControl : MonoBehaviour
 			// calculate position based on the new currentDistance
 			position = target.position - (rotation * Vector3.forward * currentDistance + targetOffset);
 			transform.position = position;
+
+			if (Input.GetKey(KeyCode.C)) {
+				Debug.Log(transform.position);
+				Debug.Log(transform.rotation);
+			}
 		}
 	}
 	
