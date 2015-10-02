@@ -7,6 +7,10 @@ TagManager:
   - Cursor
   - Floor
   - Block
+  - Hand
+  - Palm
+  - Thumb
+  - Index
   layers:
   - Default
   - TransparentFX

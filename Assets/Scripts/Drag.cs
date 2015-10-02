@@ -11,6 +11,9 @@ public class Drag : MonoBehaviour {
 	private CameraControl cam;
 	private Vector3 initialDragPos;
 
+	private Transform hand;
+	private bool dragging = false;
+
 	void Awake() {
 		r = GetComponent<MeshRenderer>();
 		rb = GetComponent<Rigidbody>();
@@ -23,24 +26,26 @@ public class Drag : MonoBehaviour {
 		Vector3 newVelocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
 		newVelocity.y = oldY; // don't clamp falling speed
 		rb.velocity = newVelocity;
+		Debug.Log (dragging);
+		if(dragging) handDrag();
 	}
-
-	void OnMouseOver() {
-		if (IsDisabled()) {
-			return;
-		}
-		if (currentBlock != null && currentBlock != gameObject) {
-			return;
-		}
-		r.material.SetColor("_Color", new Color(0.8f, 0.8f, 1f, 1f)); // light blue
-	}
-
-	void OnMouseExit() {
-		if (currentBlock == gameObject) {
-			return;
-		}
-		r.material.SetColor("_Color", Color.white);
-	}
+//
+//	void OnMouseOver() {
+//		if (IsDisabled()) {
+//			return;
+//		}
+//		if (currentBlock != null && currentBlock != gameObject) {
+//			return;
+//		}
+//		r.material.SetColor("_Color", new Color(0.8f, 0.8f, 1f, 1f)); // light blue
+//	}
+//
+//	void OnMouseExit() {
+//		if (currentBlock == gameObject) {
+//			return;
+//		}
+//		r.material.SetColor("_Color", Color.white);
+//	}
 
 	void OnMouseDown() {
 		if (IsDisabled()) {
@@ -52,6 +57,24 @@ public class Drag : MonoBehaviour {
 		cam.camActive = false;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
 		currentBlock = gameObject;
+	}
+
+	void handDrag() {
+		if (IsDisabled()) {
+			return;
+		}
+		
+		cursor = GameObject.FindGameObjectWithTag("Cursor").transform;
+		initialDragPos = cursor.position - transform.position;
+		cam.camActive = false;
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
+		currentBlock = gameObject;
+
+		Vector3 origin = initialDragPos + transform.position;
+		maxVelocity = (cursor.position - origin).magnitude * 0.1f;
+		Vector3 force = Vector3.Project(cursor.position - origin, transform.forward);
+		force *= Mathf.Log(force.magnitude + 1f, 2f) * 100f;
+		rb.AddForce(force);
 	}
 
 	void OnMouseDrag()
@@ -86,5 +109,13 @@ public class Drag : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+
+	void OnCollisionEnter(Collision collision) {
+		if (collision.gameObject.tag == "Thumb" && !IsDisabled()) {
+			dragging = true;
+			cursor = GameObject.FindGameObjectWithTag("Cursor").transform;
+			if(cursor.transform.FindChild("Cube") == null) this.transform.parent = cursor;
+		}
 	}
 }

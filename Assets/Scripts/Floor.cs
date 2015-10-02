@@ -15,6 +15,8 @@ public class Floor : MonoBehaviour {
 				GameState.ChangeState(GameState.State.GameOver);
 			else if (GameState.CurrentState!=GameState.State.GameOver)
 				GameState.ChangeState(GameState.State.Placing);
+
+			Destroy(other.gameObject);
 		}
 	}
 

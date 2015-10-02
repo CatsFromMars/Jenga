@@ -32,4 +32,14 @@ public class PlaceBlock : MonoBehaviour {
 		GameState.ChangeState(GameState.State.Taking);
 		GameState.numPlaced++;
 	}
+
+	void OnTriggerEnter(Collider other) {
+		if (other.tag == "Thumb") {
+			// Add block to Tower
+			GameObject newBlock = Instantiate(block, this.transform.position, this.transform.rotation) as GameObject;
+			newBlock.transform.parent = GameState.Tower.transform;
+			GameState.ChangeState(GameState.State.Taking);
+			GameState.numPlaced++;
+		}
+	}
 }

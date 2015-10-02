@@ -9,13 +9,13 @@ public class CameraControl : MonoBehaviour
 	public float distance = 13.0f;
 	public float maxDistance = 20.0f;
 	public float minDistance = 1.0f;
-	public float xSpeed = 200.0f;
-	public float ySpeed = 200.0f;
-	public int yMinLimit = -80;
-	public int yMaxLimit = 80;
+	public float xSpeed = 100.0f;
+	public float ySpeed = 100.0f;
+	public int yMinLimit = -20;
+	public int yMaxLimit = 60;
 	public int zoomRate = 40;
 	public float panSpeed = 0.5f;
-
+	
 	private float zoomDampening = 5.0f;
 	private float xDeg = 0.0f;
 	private float yDeg = 0.0f;
@@ -29,29 +29,31 @@ public class CameraControl : MonoBehaviour
 	private Vector3 initPosition;
 	private Vector3 initTargetPosition;
 	private Vector3 newTarget = Vector3.zero;
-
+	
 	void Start() { Init(); }
 	
 	void OnEnable() { Init(); }
 	
 	public void Init()
-	{
-		initPosition = transform.position;//new Vector3(transform.position.x, transform.position.y,transform.position.z);
-		initRotation = transform.rotation;//new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+	{ 
+		initPosition = new Vector3(transform.position.x, transform.position.y,transform.position.z);
+		//initPosition = new Vector3(7.0f,2.0f,-7.0f);
+		initRotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+		//initRotation = new Quaternion(0.0f,315.0f,0.0f,transform.rotation.w);
 		//If there is no target, create a temporary target at 'distance' from the cameras current viewpoint
 		if (!target)
 		{
 			GameObject go = new GameObject("Target");
-			go.transform.position = transform.position;
+			go.transform.position =new Vector3(0.0f,5.0f,0.0f);
 			initTargetPosition = go.transform.position;
 			target = go.transform;
 		}
-
+		
 		distance = Vector3.Distance(transform.position, target.position);
 		currentDistance = distance;
 		desiredDistance = distance;
 		
-		position = transform.position; //the original status
+		position = transform.position;//the original status
 		rotation = transform.rotation;
 		currentRotation = transform.rotation;
 		desiredRotation = transform.rotation;
@@ -59,11 +61,11 @@ public class CameraControl : MonoBehaviour
 		xDeg = Vector3.Angle(Vector3.right, transform.right);
 		yDeg = Vector3.Angle(Vector3.up, transform.up);
 	}
-
+	
 	public void ScrollToTarget(Vector3 target) {
 		newTarget = target;
 	}
-
+	
 	void LateUpdate()
 	{
 		// pan to new target incrementally
@@ -75,35 +77,52 @@ public class CameraControl : MonoBehaviour
 				newTarget = Vector3.zero;
 			}
 		}
-
+		
 		if (camActive) {
+			
+			//camera position scroll test
+			if (Input.mousePosition.x<=1 || Input.mousePosition.x>=(Screen.width-1) || 
+			    Input.mousePosition.y<=1 || Input.mousePosition.y>=(Screen.height-1)){
+				if (Input.mousePosition.x<=1)xDeg+=xSpeed*0.02f;
+				if(Input.mousePosition.x>(Screen.width-1)) xDeg-=xSpeed*0.02f;
+				if (Input.mousePosition.y<=1)yDeg-=ySpeed*0.02f;
+				if(Input.mousePosition.y>=(Screen.height-1)) yDeg += ySpeed*0.02f;
+				yDeg = yDeg = ClampAngle (yDeg, yMinLimit, yMaxLimit);
+				desiredRotation = Quaternion.Euler (yDeg, xDeg, 0);
+				currentRotation = transform.rotation;
+				rotation = Quaternion.Lerp (currentRotation, desiredRotation, Time.deltaTime * zoomDampening);
+				transform.rotation = rotation;
+				
+			}
+			
+			
 			if (Input.GetMouseButton (1)) {//right button
 				xDeg += Input.GetAxis ("Mouse X") * xSpeed * 0.02f;
 				yDeg -= Input.GetAxis ("Mouse Y") * ySpeed * 0.02f;
-
+				
 				//clamp the vertical axis for the rotation
 				yDeg = ClampAngle (yDeg, yMinLimit, yMaxLimit);
 				// set camera rotation
-				desiredRotation = Quaternion.Euler(yDeg, xDeg - 90, 0);
+				desiredRotation = Quaternion.Euler (yDeg, xDeg, 0);
 				currentRotation = transform.rotation;
 				
 				rotation = Quaternion.Lerp (currentRotation, desiredRotation, Time.deltaTime * zoomDampening);
 				transform.rotation = rotation;
 			} else if (Input.GetMouseButton (0)) {//left button pressed
-
+				
 				target.rotation = transform.rotation;
 				target.Translate (Vector3.right * -Input.GetAxis ("Mouse X") * panSpeed);
 				target.Translate (transform.up * -Input.GetAxis ("Mouse Y") * panSpeed, Space.World);
 			}
 			
-			// Reset the moving
+			// Reset the moving 
 			else if (Input.GetKey (KeyCode.Space)) {
 				transform.position = initPosition;
 				transform.rotation = initRotation;
 				target.transform.position = initTargetPosition;
 				Init ();
 			}
-
+			
 			// affect the desired Zoom distance if we roll the scrollwheel
 			desiredDistance -= Input.GetAxis ("Mouse ScrollWheel") * Time.deltaTime * zoomRate * Mathf.Abs (desiredDistance);
 			//clamp the zoom min/max
@@ -114,11 +133,6 @@ public class CameraControl : MonoBehaviour
 			// calculate position based on the new currentDistance
 			position = target.position - (rotation * Vector3.forward * currentDistance + targetOffset);
 			transform.position = position;
-
-			if (Input.GetKey(KeyCode.C)) {
-				Debug.Log(transform.position);
-				Debug.Log(transform.rotation);
-			}
 		}
 	}
 	
