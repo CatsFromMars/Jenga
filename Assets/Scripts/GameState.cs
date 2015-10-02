@@ -46,7 +46,7 @@ public class GameState : MonoBehaviour {
         switch (newState) {
             case State.Taking:
                 Debug.Log("switching to state: taking");
-				cam.ScrollToTarget(new Vector3(cam.target.position.x, 10.5f, cam.target.position.z));
+				//cam.ScrollToTarget(new Vector3(cam.target.position.x, 10.5f, cam.target.position.z));
                 foreach (Transform child in PlaceLocations.transform) {
                     child.gameObject.SetActive(false);
                 }
@@ -72,7 +72,7 @@ public class GameState : MonoBehaviour {
                     child.gameObject.SetActive(true);
                 }
 
-                cam.ScrollToTarget(new Vector3(cam.target.position.x, maxHeight + 5f, cam.target.position.z));
+                //cam.ScrollToTarget(new Vector3(cam.target.position.x, maxHeight + 5f, cam.target.position.z));
                 break;
 
             case State.GameOver:
@@ -82,7 +82,7 @@ public class GameState : MonoBehaviour {
                 }
 
                 // Scroll to center
-				cam.ScrollToTarget(new Vector3(2.7f, 8f, -1.3f));
+				//cam.ScrollToTarget(new Vector3(2.7f, 8f, -1.3f));
 				//AudioSource a = cam.GetComponent<AudioSource>();
 				//if(!a.isPlaying) a.Play();
                 break;

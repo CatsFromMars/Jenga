@@ -301,7 +301,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 149163616}
   m_LocalRotation: {x: -.239117667, y: .369643658, z: -.0990457311, w: -.892399192}
-  m_LocalPosition: {x: 5, y: 11, z: -5}
+  m_LocalPosition: {x: 5.38000011, y: 10.0799999, z: -5.38000011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 433969943}
@@ -314,10 +314,10 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 149163616}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 702f84e83affec94db438aa0ea900044, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ac4d9093b2c482b45b922affdf68b98d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -412,9 +412,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c496354bb65cf4f97778e269a0d913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camActive: 1
-  target: {fileID: 1110599576}
-  hand: {fileID: 0}
+  camActive: 0
+  target: {fileID: 1636034689}
+  hand: {fileID: 1110599576}
   targetOffset: {x: 0, y: 0, z: 0}
   distance: 13
   maxDistance: 20
