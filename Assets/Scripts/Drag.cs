@@ -27,7 +27,7 @@ public class Drag : MonoBehaviour {
 		rb.velocity = newVelocity;
 
 		if (dragging) {
-			if (IsPinching()) {
+			if (Pincher.IsPinching()) {
 				OnDrag();
 			} else {
 				OnRelease();
@@ -130,16 +130,6 @@ public class Drag : MonoBehaviour {
 		return false;
 	}
 
-	bool IsPinching() {
-		Frame currentFrame = GameState.HandController.GetFrame();
-		if (currentFrame.Hands.IsEmpty) {
-			return false;
-		}
-
-		Hand hand = currentFrame.Hands[0];
-		return hand.PinchStrength > 0.25f;
-	}
-
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.tag == "Index") {
 			OnHover();
@@ -154,7 +144,7 @@ public class Drag : MonoBehaviour {
 
 	void OnCollisionStay(Collision collision) {
 		// Start dragging if hand is currently pinching
-		if (!dragging && collision.gameObject.tag == "Index" && IsPinching()) {
+		if (!dragging && collision.gameObject.tag == "Index" && Pincher.IsPinching()) {
 			OnStartDrag();
 			//if(cursor.transform.FindChild("Cube") == null) this.transform.parent = cursor;
 		}

@@ -3,12 +3,13 @@ using System.Collections;
 using Leap;
 
 public class Pincher : MonoBehaviour {
-	public bool pinching = false;
+	public static bool IsPinching() {
+        Frame currentFrame = GameState.HandController.GetFrame();
+        if (currentFrame.Hands.IsEmpty) {
+            return false;
+        }
 
-	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.tag == "Thumb" || other.gameObject.tag == "Index") {
-			Debug.Log ("PINCH");
-			pinching = true;
-		}
-	}
+        Hand hand = currentFrame.Hands[0];
+        return hand.PinchStrength > 0.3f;
+    }
 }

@@ -1913,7 +1913,6 @@ GameObject:
   - 54: {fileID: 1110599578}
   - 33: {fileID: 1110599580}
   - 23: {fileID: 1110599579}
-  - 114: {fileID: 1110599581}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Cursor
@@ -1990,17 +1989,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1110599575}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1110599581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1110599575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e20fdd1518d84cc4faaf04cf27b50cdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1126242010 stripped
 Transform:
   m_PrefabParentObject: {fileID: 463588, guid: 1e934881f6725e84192592721c7ccc42, type: 2}
@@ -3319,15 +3307,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -.50999999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.5999999
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 7.19999981
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3368,7 +3356,7 @@ Prefab:
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: leftGraphicsModel
       value: 
-      objectReference: {fileID: 11400010, guid: 95a8b1228f1034c8f9070761f4f13b21,
+      objectReference: {fileID: 11450718, guid: 3b0333c5acc18e041aac955b32db5844,
         type: 2}
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: rightGraphicsModel
@@ -3378,12 +3366,17 @@ Prefab:
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: leftPhysicsModel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11466208, guid: 139e5febb707b5848b0bf2883388b15f,
+        type: 2}
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: rightPhysicsModel
       value: 
       objectReference: {fileID: 11466208, guid: 139e5febb707b5848b0bf2883388b15f,
         type: 2}
+    - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
+      propertyPath: handMovementScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
   m_IsPrefabParent: 0

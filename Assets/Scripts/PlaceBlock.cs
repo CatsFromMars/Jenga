@@ -4,28 +4,48 @@ using System.Collections.Generic;
 
 public class PlaceBlock : MonoBehaviour {
 	public GameObject block;
+	private static GameObject currentBlock;
 	MeshRenderer r;
 
 	void Awake() {
 		r = GetComponent<MeshRenderer>();
 	}
 
+	/* Mouse controls */
 	void OnMouseEnter() {
+		OnHover();
+	}
+	void OnMouseExit() {
+		OnHoverExit();
+	}
+	void OnMouseUp() {
+		Place();
+	}
+
+
+	void OnHover() {
 		Color color = r.material.color;
 		color.a = 0.5f;
 		r.material.color = color;
+
+		if (currentBlock != null && currentBlock != gameObject) {
+			currentBlock.GetComponent<PlaceBlock>().OnHoverExit();
+		}
+		currentBlock = gameObject;
 	}
 
-	void OnMouseExit() {
+	void OnHoverExit() {
 		Color color = r.material.color;
 		color.a = 0.2f;
 		r.material.color = color;
+		currentBlock = null;
 	}
 
-	void OnMouseDown() {
-	}
+	void Place() {
+		if (currentBlock != gameObject) {
+			return;
+		}
 
-	void OnMouseUp() {
 		// Add block to Tower
 		GameObject newBlock = Instantiate(block, this.transform.position, this.transform.rotation) as GameObject;
 		newBlock.transform.parent = GameState.Tower.transform;
@@ -34,12 +54,20 @@ public class PlaceBlock : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.tag == "Thumb") {
-			// Add block to Tower
-			GameObject newBlock = Instantiate(block, this.transform.position, this.transform.rotation) as GameObject;
-			newBlock.transform.parent = GameState.Tower.transform;
-			GameState.ChangeState(GameState.State.Taking);
-			GameState.numPlaced++;
+		if (other.tag == "Index") {
+			OnHover();
+		}
+	}
+
+	void OnTriggerExit(Collider other) {
+		if (other.tag == "Index") {
+			OnHoverExit();
+		}
+	}
+
+	void OnTriggerStay(Collider other) {
+		if (other.tag == "Index" && Pincher.IsPinching()) {
+			Place();
 		}
 	}
 }
