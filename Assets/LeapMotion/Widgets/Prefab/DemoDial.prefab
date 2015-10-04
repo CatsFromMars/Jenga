@@ -616,42 +616,42 @@ MonoBehaviour:
   DebugDisplayString: 
   DebugDisplayInt: 0
   DialLabels:
-  - 4d6f6e6b657973
-  - 4d6f6f7365
-  - 526f6f7374657273
-  - 526163636f6f6e73
-  - 4269736f6e
-  - 42756666616c6f6573
-  - 4265617273
-  - 4c696f6e73
-  - 546967657273
-  - 4c6967657273
-  - 556e69636f726e73
-  - 476f617473
-  - 5368656570
-  - 537175697272656c73
-  - 436869706d756e6b73
-  - 42617473
-  - 43617473
-  - 52617473
-  - 4d696365
-  - 42656176657273
-  - 42616467657273
-  - 506f72637570696e6573
-  - 536c6f746873
-  - 5a6562726173
-  - 5768616c6573
-  - 5365616c73
-  - 446f6c7068696e73
-  - 4f7474657273
-  - 50616e7468657273
-  - 426f6263617473
-  - 57656173656c73
-  - 46657272657473
-  - 536b756e6b73
-  - 466f786573
-  - 4465657273
-  - 486f72736573
+  - Monkeys
+  - Moose
+  - Roosters
+  - Raccoons
+  - Bison
+  - Buffaloes
+  - Bears
+  - Lions
+  - Tigers
+  - Ligers
+  - Unicorns
+  - Goats
+  - Sheep
+  - Squirrels
+  - Chipmunks
+  - Bats
+  - Cats
+  - Rats
+  - Mice
+  - Beavers
+  - Badgers
+  - Porcupines
+  - Sloths
+  - Zebras
+  - Whales
+  - Seals
+  - Dolphins
+  - Otters
+  - Panthers
+  - Bobcats
+  - Weasels
+  - Ferrets
+  - Skunks
+  - Foxes
+  - Deers
+  - Horses
   DialRadius: .100000001
   LabelAngleRangeStart: 0
   LabelAngleRangeEnd: 360
@@ -661,23 +661,11 @@ MonoBehaviour:
   DialPhysics: {fileID: 447256}
   m_dialModeBase: {fileID: 11425570}
   DialCenter: {fileID: 467626}
-  PickerColorInActive:
-    r: 0
-    g: .250980407
-    b: .250980407
-    a: .501960814
-  PickerColorActive:
-    r: 0
-    g: 1
-    b: 1
-    a: 1
+  PickerColorInActive: {r: 0, g: .250980407, b: .250980407, a: .501960814}
+  PickerColorActive: {r: 0, g: 1, b: 1, a: 1}
   PickerBoxImage: {fileID: 11436180}
   hilightTextVolume: {fileID: 11403266}
-  TextColor:
-    r: .435294122
-    g: .568627477
-    b: .56078434
-    a: 1
+  TextColor: {r: .435294122, g: .568627477, b: .56078434, a: 1}
 --- !u!114 &11465478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -717,6 +705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FadeCurve:
+    serializedVersion: 2
     m_Curve:
     - time: .5
       value: 0

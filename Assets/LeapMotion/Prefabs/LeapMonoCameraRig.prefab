@@ -227,7 +227,6 @@ MonoBehaviour:
   leftPhysicsModel: {fileID: 11460542, guid: dc02f2d83c1ac4b4d9b4ec82df1b1732, type: 2}
   rightGraphicsModel: {fileID: 11400006, guid: 38c9cece84724db4c9a5bfcbdf2e2115, type: 2}
   rightPhysicsModel: {fileID: 11460542, guid: dc02f2d83c1ac4b4d9b4ec82df1b1732, type: 2}
-  handParent: {fileID: 465928}
   toolModel: {fileID: 0}
   isHeadMounted: 1
   mirrorZAxis: 0
@@ -271,9 +270,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd815635398474cbbba564563a209f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eye: 0
+  retrievedEye: -1
   syncMode: 0
   gammaCorrection: 1
+  handController: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

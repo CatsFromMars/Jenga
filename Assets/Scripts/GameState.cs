@@ -17,6 +17,7 @@ public class GameState : MonoBehaviour {
     private State currentState;
     public GameObject placeLocations;
     public GameObject tower;
+    public HandController handController;
     public bool enableCheats;
 
     public static State CurrentState {
@@ -34,6 +35,12 @@ public class GameState : MonoBehaviour {
     public static GameObject Tower {
         get {
             return gameState.tower;
+        }
+    }
+
+    public static HandController HandController {
+        get {
+            return gameState.handController;
         }
     }
 

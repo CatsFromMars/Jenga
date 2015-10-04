@@ -2,16 +2,18 @@
 using System.Collections;
 
 public class FollowHand1 : MonoBehaviour {
-
-	GameObject hand;
+	GameObject finger;
 
 	void Awake() {
-		hand = GameObject.FindGameObjectWithTag("Palm");
+		finger = GameObject.FindGameObjectWithTag("Thumb");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(hand == null) hand = GameObject.FindGameObjectWithTag("Palm");
-		else transform.position = hand.transform.position;
+		if (finger == null) {
+			finger = GameObject.FindGameObjectWithTag("Thumb");
+		} else {
+			transform.position = finger.transform.position;
+		}
 	}
 }

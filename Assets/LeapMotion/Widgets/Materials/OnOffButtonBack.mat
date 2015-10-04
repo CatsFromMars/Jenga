@@ -24,14 +24,14 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Detail
+          name: _Illum
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Illum
+          name: _Detail
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -43,12 +43,12 @@ Material:
         second: .00999999978
       data:
         first:
-          name: _Gain
-        second: 1
-      data:
-        first:
           name: _EmissionLM
         second: 10
+      data:
+        first:
+          name: _Gain
+        second: 1
     m_Colors:
       data:
         first:

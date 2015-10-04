@@ -566,7 +566,6 @@ MonoBehaviour:
   leftPhysicsModel: {fileID: 0}
   rightGraphicsModel: {fileID: 11400010, guid: 7d0286b4b0dbe40248b3fe201ba8adf5, type: 2}
   rightPhysicsModel: {fileID: 0}
-  handParent: {fileID: 0}
   toolModel: {fileID: 0}
   isHeadMounted: 0
   mirrorZAxis: 0

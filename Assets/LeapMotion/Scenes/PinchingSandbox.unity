@@ -2130,6 +2130,7 @@ MonoBehaviour:
   fadeInTime: 1
   fadeOutTime: 1
   fade:
+    serializedVersion: 2
     m_Curve:
     - time: 0
       value: 0
@@ -2146,11 +2147,7 @@ MonoBehaviour:
   waitFrames: 10
   embeddedReplacementImage: {fileID: 2800000, guid: ebc61a8ce70eb495494d1209ae9dbf43,
     type: 3}
-  onColor:
-    r: .544117689
-    g: .544117689
-    b: .544117689
-    a: 1
+  onColor: {r: .544117689, g: .544117689, b: .544117689, a: 1}
 --- !u!131 &1273058545
 GUITexture:
   m_ObjectHideFlags: 0
@@ -2674,12 +2671,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feefc2f01ecd948f9bd88d185b4fc0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabbableLayers: {}
+  grabbableLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   grabTriggerDistance: .800000012
   releaseTriggerDistance: 1.20000005
   grabObjectDistance: 1.5
   releaseBreakDistance: .5
   releaseStrengthCurve:
+    serializedVersion: 2
     m_Curve:
     - time: 0
       value: .999999881
@@ -2717,9 +2717,10 @@ MonoBehaviour:
   - {fileID: 1505210033}
   - {fileID: 13448876}
   - {fileID: 150396097}
-  palm: {fileID: 1343513555}
+  palm: {fileID: 1343513556}
   forearm: {fileID: 0}
   wristJoint: {fileID: 0}
+  elbowJoint: {fileID: 0}
   filtering: .5
 --- !u!1 &1505210031
 GameObject:
