@@ -3,6 +3,9 @@ using System.Collections;
 using Leap;
 
 public class Drag : MonoBehaviour {
+	public Color highlightColor = new Color(0.8f, 0.8f, 1f, 1f); // light blue
+	private Color oldColor;
+
 	private static GameObject currentBlock;
 	private bool dragging = false;
 
@@ -17,6 +20,7 @@ public class Drag : MonoBehaviour {
 		r = GetComponent<MeshRenderer>();
 		rb = GetComponent<Rigidbody>();
 		cam = Camera.main.GetComponent<CameraControl>();
+		oldColor = r.material.color;
 	}
 
 	void Update() {
@@ -36,21 +40,26 @@ public class Drag : MonoBehaviour {
 	}
 
 	/* Mouse controls */
-	/*void OnMouseDown() {
+	void OnMouseDown() {
+		if (GameState.IsLeapActive) return;
 		OnStartDrag();
 	}
 	void OnMouseDrag() {
+		if (GameState.IsLeapActive) return;
 		OnDrag();
 	}
 	void OnMouseUp() {
+		if (GameState.IsLeapActive) return;
 		OnRelease();
 	}
 	void OnMouseOver() {
+		if (GameState.IsLeapActive) return;
 		OnHover();
 	}
 	void OnMouseExit() {
+		if (GameState.IsLeapActive) return;
 		OnHoverExit();
-	}*/
+	}
 
 
 	/* Called when hovering over or pointing at block */
@@ -66,7 +75,7 @@ public class Drag : MonoBehaviour {
 			currentBlock = gameObject;
 			lastDrag.OnHoverExit();
 		}
-		r.material.SetColor("_Color", new Color(0.8f, 0.8f, 1f, 1f)); // light blue
+		r.material.SetColor("_Color", highlightColor);
 		currentBlock = gameObject;
 	}
 
@@ -76,7 +85,7 @@ public class Drag : MonoBehaviour {
 			return;
 		}
 
-		cursor = GameObject.FindGameObjectWithTag("Palm").transform;
+		cursor = GetCursorTransform();
 		initialDragPos = cursor.position;
 		cam.camActive = false;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -90,7 +99,7 @@ public class Drag : MonoBehaviour {
 			return;
 		}
 
-		cursor = GameObject.FindGameObjectWithTag("Palm").transform;
+		cursor = GetCursorTransform();
 
 		// Scale max velocity based on distance of cursor
 		Vector3 origin = initialDragPos;
@@ -105,7 +114,7 @@ public class Drag : MonoBehaviour {
 		if (currentBlock == gameObject) {
 			return;
 		}
-		r.material.SetColor("_Color", Color.white);
+		r.material.SetColor("_Color", oldColor);
 	}
 
 	/* Called when block is released */
@@ -114,7 +123,7 @@ public class Drag : MonoBehaviour {
 		rb.constraints = RigidbodyConstraints.None;
 		maxVelocity = 100f;
 
-		r.material.SetColor("_Color", Color.white);
+		r.material.SetColor("_Color", oldColor);
 		currentBlock = null;
 		dragging = false;
 	}
@@ -147,6 +156,14 @@ public class Drag : MonoBehaviour {
 		if (!dragging && collision.gameObject.tag == "Index" && Pincher.IsPinching()) {
 			OnStartDrag();
 			//if(cursor.transform.FindChild("Cube") == null) this.transform.parent = cursor;
+		}
+	}
+
+	Transform GetCursorTransform() {
+		if (GameState.IsLeapActive) {
+			return GameObject.FindGameObjectWithTag("Palm").transform;
+		} else {
+			return GameObject.FindGameObjectWithTag("Cursor").transform;
 		}
 	}
 }
