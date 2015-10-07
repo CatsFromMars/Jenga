@@ -2,6 +2,7 @@
 using System.Collections;
 using Leap;
 
+[RequireComponent (typeof(Rigidbody))]
 public class Drag : MonoBehaviour {
 	public Color highlightColor = new Color(0.8f, 0.8f, 1f, 1f); // light blue
 	private Color oldColor;
@@ -15,12 +16,14 @@ public class Drag : MonoBehaviour {
 	private MeshRenderer r;
 	private CameraControl cam;
 	private Vector3 initialDragPos;
+	private SoundEffects soundEffects;
 
 	void Awake() {
 		r = GetComponent<MeshRenderer>();
 		rb = GetComponent<Rigidbody>();
 		cam = Camera.main.GetComponent<CameraControl>();
 		oldColor = r.material.color;
+		soundEffects = GetComponent<SoundEffects>();
 	}
 
 	void Update() {
@@ -106,6 +109,13 @@ public class Drag : MonoBehaviour {
 		maxVelocity = (cursor.position - origin).magnitude * 0.1f;
 		Vector3 force = Vector3.Project(cursor.position - origin, transform.forward);
 		force *= Mathf.Log(force.magnitude + 1f, 2f) * 20f;
+
+		if (!soundEffects.isPlaying) {
+			soundEffects.PlayRandom();
+		} else {
+			Debug.Log(force.magnitude);
+			soundEffects.SetVolume(force.magnitude / 30f);
+		}
 		rb.AddForce(force);
 	}
 
@@ -126,6 +136,10 @@ public class Drag : MonoBehaviour {
 		r.material.SetColor("_Color", oldColor);
 		currentBlock = null;
 		dragging = false;
+
+		if (soundEffects.isPlaying) {
+			soundEffects.FadeOut();
+		}
 	}
 
 	bool IsDisabled() {
