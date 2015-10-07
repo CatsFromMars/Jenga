@@ -109,7 +109,7 @@ GameObject:
   - 114: {fileID: 11454074}
   m_Layer: 0
   m_Name: hand
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1698,7 +1698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d3a4b143b26654a869636501a4d460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinching: 0
 --- !u!114 &11471722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1792,7 +1791,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Untagged
+      value: Hand
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
