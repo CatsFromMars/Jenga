@@ -5,10 +5,10 @@ public class Floor : MonoBehaviour {
 	private int resetCounter = 0;
 	private int resetWaitTime = 10;
 	public int blockCounter = 0;
-	private AudioSource a;
+	private SoundEffects soundEffects;
 
 	void Awake() {
-		a = GetComponent<AudioSource>();
+		soundEffects = GetComponent<SoundEffects>();
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -18,11 +18,15 @@ public class Floor : MonoBehaviour {
 			//Switch States
 			if(blockCounter > 1)
 				GameState.ChangeState(GameState.State.GameOver);
-			else if (GameState.CurrentState!=GameState.State.GameOver)
+			else if (GameState.CurrentState != GameState.State.GameOver)
 				GameState.ChangeState(GameState.State.Placing);
 
+			// play sound effect
+			if(!soundEffects.isPlaying) {
+				float volume = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude / 30f;
+				soundEffects.PlayRandom(volume);
+			}
 			Destroy(other.gameObject);
-			if(!a.isPlaying) a.Play();
 		}
 	}
 

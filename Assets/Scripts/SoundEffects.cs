@@ -29,11 +29,15 @@ public class SoundEffects : MonoBehaviour {
     }
 
     public void PlayRandom() {
+        PlayRandom(0.05f);
+    }
+
+    public void PlayRandom(float volume) {
         if (audio.isPlaying) {
             return;
         }
         audio.clip = sounds[Random.Range(0, sounds.Length)];
-        audio.volume = 0.05f;
+        audio.volume = volume;
         audio.Play();
     }
 

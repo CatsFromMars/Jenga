@@ -110,11 +110,11 @@ public class Drag : MonoBehaviour {
 		Vector3 force = Vector3.Project(cursor.position - origin, transform.forward);
 		force *= Mathf.Log(force.magnitude + 1f, 2f) * 20f;
 
+		float volume = force.magnitude / 40f;
 		if (!soundEffects.isPlaying) {
-			soundEffects.PlayRandom();
+			soundEffects.PlayRandom(volume);
 		} else {
-			Debug.Log(force.magnitude);
-			soundEffects.SetVolume(force.magnitude / 30f);
+			soundEffects.SetVolume(volume);
 		}
 		rb.AddForce(force);
 	}
