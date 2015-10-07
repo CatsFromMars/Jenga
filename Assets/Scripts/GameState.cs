@@ -44,6 +44,12 @@ public class GameState : MonoBehaviour {
         }
     }
 
+    public static bool IsLeapActive {
+        get {
+            return HandController.IsConnected();
+        }
+    }
+
     // Handle state change logic
     public static void ChangeState(State newState) {
         if (newState == CurrentState) {

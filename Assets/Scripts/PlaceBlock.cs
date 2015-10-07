@@ -13,12 +13,15 @@ public class PlaceBlock : MonoBehaviour {
 
 	/* Mouse controls */
 	void OnMouseEnter() {
+		if (GameState.IsLeapActive) return;
 		OnHover();
 	}
 	void OnMouseExit() {
+		if (GameState.IsLeapActive) return;
 		OnHoverExit();
 	}
 	void OnMouseUp() {
+		if (GameState.IsLeapActive) return;
 		Place();
 	}
 
