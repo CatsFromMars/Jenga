@@ -3836,7 +3836,7 @@ Prefab:
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: leftPhysicsModel
       value: 
-      objectReference: {fileID: 11433230, guid: 65215f0037e0c8f41818b3d8de92cb91,
+      objectReference: {fileID: 11466208, guid: 139e5febb707b5848b0bf2883388b15f,
         type: 2}
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: rightPhysicsModel
