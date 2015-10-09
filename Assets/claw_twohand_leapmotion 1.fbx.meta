@@ -1,0 +1,172 @@
+fileFormatVersion: 2
+guid: cc3a49f9b1c314a4d909ea7fb51bd20c
+timeCreated: 1444352478
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: INDEX1
+    100004: INDEX1 1
+    100006: INDEX2
+    100008: INDEX2 1
+    100010: INDEX3
+    100012: INDEX3 1
+    100014: INDEX4
+    100016: INDEX4 1
+    100018: L_arm
+    100020: L_wrist
+    100022: MIDDLE1
+    100024: MIDDLE1 1
+    100026: MIDDLE2
+    100028: MIDDLE2 1
+    100030: MIDDLE3
+    100032: MIDDLE3 1
+    100034: MIDDLE4
+    100036: MIDDLE4 1
+    100038: PINKY1
+    100040: PINKY1 1
+    100042: PINKY2
+    100044: PINKY2 1
+    100046: PINKY3
+    100048: PINKY3 1
+    100050: PINKY4
+    100052: PINKY4 1
+    100054: polySurface18
+    100056: polySurface9
+    100058: R_arm
+    100060: R_wrist
+    100062: RING1
+    100064: RING1 1
+    100066: RING2
+    100068: RING2 1
+    100070: RING3
+    100072: RING3 1
+    100074: RING4
+    100076: RING4 1
+    100078: root
+    100080: THUMB1
+    100082: THUMB1 1
+    100084: THUMB2
+    100086: THUMB2 1
+    100088: THUMB3
+    100090: THUMB3 1
+    100092: THUMB4
+    100094: THUMB4 1
+    400000: //RootNode
+    400002: INDEX1
+    400004: INDEX1 1
+    400006: INDEX2
+    400008: INDEX2 1
+    400010: INDEX3
+    400012: INDEX3 1
+    400014: INDEX4
+    400016: INDEX4 1
+    400018: L_arm
+    400020: L_wrist
+    400022: MIDDLE1
+    400024: MIDDLE1 1
+    400026: MIDDLE2
+    400028: MIDDLE2 1
+    400030: MIDDLE3
+    400032: MIDDLE3 1
+    400034: MIDDLE4
+    400036: MIDDLE4 1
+    400038: PINKY1
+    400040: PINKY1 1
+    400042: PINKY2
+    400044: PINKY2 1
+    400046: PINKY3
+    400048: PINKY3 1
+    400050: PINKY4
+    400052: PINKY4 1
+    400054: polySurface18
+    400056: polySurface9
+    400058: R_arm
+    400060: R_wrist
+    400062: RING1
+    400064: RING1 1
+    400066: RING2
+    400068: RING2 1
+    400070: RING3
+    400072: RING3 1
+    400074: RING4
+    400076: RING4 1
+    400078: root
+    400080: THUMB1
+    400082: THUMB1 1
+    400084: THUMB2
+    400086: THUMB2 1
+    400088: THUMB3
+    400090: THUMB3 1
+    400092: THUMB4
+    400094: THUMB4 1
+    4300000: polySurface9
+    4300002: polySurface18
+    9500000: //RootNode
+    13700000: polySurface18
+    13700002: polySurface9
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 25
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
