@@ -10,7 +10,6 @@ public class Pincher : MonoBehaviour {
         }
 
         Hand hand = currentFrame.Hands[0];
-		Debug.Log (hand.PinchStrength);
         return hand.PinchStrength > 0.3f;
     }
 }
