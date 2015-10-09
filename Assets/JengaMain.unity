@@ -3104,6 +3104,7 @@ GameObject:
   - 23: {fileID: 1618288278}
   - 114: {fileID: 1618288281}
   - 82: {fileID: 1618288282}
+  - 114: {fileID: 1618288283}
   m_Layer: 0
   m_Name: FallDetector
   m_TagString: Untagged
@@ -3248,6 +3249,21 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &1618288283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1618288276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4beaf3fc325731147b575a139082d3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 8300000, guid: 63e8ccb0abe29db4c81ecf7886da911c, type: 3}
+  - {fileID: 8300000, guid: bb322fdecdaeecc4d892ddeeb05a34f8, type: 3}
+  - {fileID: 8300000, guid: 25a7ffe7058be554197c79e623c28c20, type: 3}
 --- !u!1 &1636034688
 GameObject:
   m_ObjectHideFlags: 0
